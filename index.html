@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>グリーンベイキッチン レシピ一覧｜マヌカハニー専門 グリーンベイ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600;700&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#f6ecd6;
+  --paper:#fffaf0;
+  --blue:#1d4fb3;
+  --blue-d:#163b86;
+  --red:#dd4a26;
+  --yellow:#ffd21f;
+  --green:#3f7a1f;
+  --ink:#1f1c18;
+  --sub:#5d5548;
+  --line:#e4d6b8;
+  --en:"Josefin Sans",sans-serif;
+  --jp:"Zen Kaku Gothic New",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:var(--jp);font-weight:500;font-size:17px;line-height:1.7;letter-spacing:.04em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+.draft{background:var(--ink);color:#fff;font-size:14px;text-align:center;padding:5px}
+.nw{white-space:nowrap}
+
+/* header */
+.hd{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;max-width:1000px;margin:0 auto}
+.hd .logo{font-family:var(--en);font-weight:700;font-size:18px;letter-spacing:.24em;color:var(--blue)}
+.hd .logo small{display:block;font-family:var(--jp);font-size:14px;letter-spacing:.06em;color:var(--sub);font-weight:500}
+.hd a.top{font-size:15px;font-weight:700;border-bottom:2px solid var(--yellow)}
+
+/* FV */
+.fv{position:relative;padding:20px 0 40px;overflow:hidden}
+.fv-in{display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:end}
+.fv-t{text-align:center;padding-bottom:10px}
+.fv-en{font-family:var(--en);font-weight:700;font-size:16px;letter-spacing:.32em;color:var(--blue)}
+.fv h1{font-weight:900;color:var(--red);font-size:min(13vw,92px);line-height:1.15;letter-spacing:.02em;margin-top:6px}
+.fv .sub{font-weight:700;font-size:min(5vw,24px);letter-spacing:.3em;margin-top:6px}
+.fv .lead{margin-top:18px;font-size:17px}
+.fv .count{display:inline-flex;align-items:baseline;gap:6px;margin-top:18px;background:var(--blue);color:#fff;border-radius:999px;padding:6px 24px 4px;font-weight:700;font-size:18px}
+.fv .count b{font-family:var(--en);font-size:38px;line-height:1;color:var(--yellow)}
+.fv-y{position:relative;align-self:end}
+.fv-y img{width:100%;height:auto;animation:sway 5s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes sway{0%,100%{transform:rotate(-1.2deg)}50%{transform:rotate(1.2deg)}}
+.fv-y:before{content:"";position:absolute;left:8%;right:8%;bottom:-6px;height:22px;border-radius:50%;background:rgba(29,79,179,.14)}
+
+/* pickup */
+.pick{display:grid;grid-template-columns:1.25fr 1fr;align-items:center;background:var(--paper);border-radius:22px;overflow:hidden;margin-top:6px;border:2px solid var(--ink);transition:transform .25s}
+.pick:hover{transform:translateY(-3px)}
+.pick img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.pick .bd{padding:18px 22px;text-align:center}
+.pick .new{display:inline-block;font-family:var(--en);font-weight:700;font-size:15px;letter-spacing:.14em;background:var(--red);color:#fff;border-radius:6px;padding:4px 12px 2px}
+.pick h2{font-weight:900;font-size:min(6vw,28px);line-height:1.45;margin-top:10px}
+.pick .pr{display:block;font-size:15px;color:var(--sub);margin-top:6px}
+.pick .go{display:inline-block;margin-top:12px;font-weight:700;font-size:16px;color:var(--blue);border-bottom:2px solid var(--blue)}
+
+/* section */
+.sec{padding:52px 0}
+.h2{text-align:center;font-weight:900;font-size:min(7vw,36px);line-height:1.4}
+.h2 em{font-style:normal;color:var(--red)}
+.h2-lead{text-align:center;margin-top:8px;font-size:16px;color:var(--sub)}
+
+/* filters */
+.filters{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:18px}
+.chip{font-weight:700;font-size:16px;border:2px solid var(--ink);border-radius:999px;padding:6px 16px;background:var(--paper);transition:background .2s,color .2s}
+.chip span{font-family:var(--en);font-size:14px;margin-left:4px;color:var(--sub)}
+.chip.on{background:var(--ink);color:#fff}
+.chip.on span{color:var(--yellow)}
+.state{display:none;align-items:center;justify-content:center;gap:10px;margin-top:14px;font-weight:700;font-size:16px}
+.state.show{display:flex}
+.state b{color:var(--red)}
+.state button{font-size:15px;font-weight:700;border-bottom:2px solid var(--ink)}
+
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 16px;margin-top:22px}
+.card{display:flex;flex-direction:column;text-align:center;transition:transform .25s;animation:pop .35s ease both}
+.card:hover{transform:translateY(-4px)}
+.card .im{position:relative}
+.card img{width:100%;aspect-ratio:16/9;border-radius:14px;object-fit:cover;background:var(--yellow);border:2px solid var(--ink)}
+.card .nb{position:absolute;left:-6px;top:-8px;font-family:var(--en);font-weight:700;font-size:14px;letter-spacing:.1em;background:var(--red);color:#fff;border-radius:6px;padding:3px 9px 1px}
+.card .tags{display:flex;justify-content:center;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tg{font-size:14px;font-weight:700;border-radius:6px;padding:1px 10px;line-height:1.6}
+.tg.pf{background:var(--blue);color:#fff}
+.tg.ty{background:var(--yellow)}
+.card h3{font-weight:900;font-size:18px;line-height:1.5;margin-top:8px;word-break:auto-phrase}
+.card .dt{font-family:var(--en);font-size:14px;color:var(--sub);margin-top:2px}
+@keyframes pop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.empty{text-align:center;padding:30px 0;font-weight:700;color:var(--sub)}
+
+/* region map */
+.map{background:var(--blue);color:#fff}
+.map .h2 em{color:var(--yellow)}
+.map .h2-lead{color:#dfe7ff}
+.regions{display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:auto auto auto;gap:12px;margin-top:24px}
+.rg{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.35);border-radius:18px;padding:12px 10px 14px;text-align:center}
+.rg h3{font-weight:900;font-size:17px;letter-spacing:.06em}
+.rg h3 small{font-family:var(--en);font-size:14px;color:var(--yellow);margin-left:4px}
+.rg .ps{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:8px}
+.rg .ps button{background:var(--yellow);color:var(--ink);font-weight:900;font-size:16px;border-radius:10px;padding:4px 12px;transition:transform .2s}
+.rg .ps button:hover{transform:scale(1.06)}
+.rg.r-hk{grid-column:5/7;grid-row:1}
+.rg.r-kt{grid-column:4/7;grid-row:2}
+.rg.r-cb{grid-column:3/4;grid-row:1/3}
+.rg.r-kk{grid-column:2/3;grid-row:2}
+.rg.r-cs{grid-column:1/3;grid-row:1}
+.rg.r-ky{grid-column:1/2;grid-row:2/4}
+.rg.r-teiban{grid-column:2/7;grid-row:3;background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.rg.r-teiban h3 small{color:var(--red)}
+.rg.r-teiban .ps button{background:var(--ink);color:#fff}
+
+/* guide */
+.guide{display:grid;grid-template-columns:1fr 240px;gap:24px;align-items:center}
+.guide ul{list-style:none;margin-top:16px;border-top:2px solid var(--ink)}
+.guide li a{display:flex;justify-content:space-between;gap:12px;padding:14px 4px;border-bottom:1px solid var(--line);font-weight:700;font-size:17px;transition:color .2s}
+.guide li a:after{content:"›";color:var(--red);font-size:22px;line-height:1}
+.guide li a:hover{color:var(--blue)}
+.guide .h2,.guide .h2-lead{text-align:center}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;padding:14px 16px;font-weight:900;font-size:18px;background:var(--red);color:#fff;transition:filter .2s,transform .2s}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn:after{content:"";width:8px;height:8px;border-top:2.5px solid currentColor;border-right:2.5px solid currentColor;transform:rotate(45deg)}
+.btn.bl{background:var(--blue)}
+.note{margin-top:24px;font-size:14px;color:var(--sub);text-align:center}
+.ft{background:var(--ink);color:#fff;text-align:center;padding:26px 20px;font-size:14px}
+.ft .logo{font-family:var(--en);font-weight:700;letter-spacing:.24em;font-size:18px;color:var(--yellow)}
+
+/* SP */
+@media (max-width:760px){
+  .fv-in{grid-template-columns:1fr;gap:0}
+  .fv-y{width:58%;max-width:240px;margin:6px auto 0}
+  .pick{grid-template-columns:1fr}
+  .pick .bd{padding:14px 16px 18px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 12px}
+  .card h3{font-size:16px}
+  .regions{grid-template-columns:1fr 1fr;grid-template-rows:none}
+  .rg[class*="r-"]{grid-column:auto;grid-row:auto}
+  .rg.r-hk{order:1}.rg.r-kt{order:2}.rg.r-cb{order:3}.rg.r-kk{order:4}.rg.r-cs{order:5}.rg.r-ky{order:6}
+  .rg.r-teiban{order:7;grid-column:1/-1}
+  .guide{grid-template-columns:1fr}
+  .guide .yu{width:46%;max-width:200px;margin:0 auto;order:-1}
+  .btns{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){.fv-y img,.card{animation:none}}
+</style>
+</head>
+<body>
+<div class="draft">確認用ページです</div>
+
+<header class="hd">
+  <a class="logo" href="https://www.rakuten.co.jp/manuka/">GREEN BAY<small>マヌカハニー専門 グリーンベイ</small></a>
+  <a class="top" href="https://www.rakuten.co.jp/manuka/">ショップトップ</a>
+</header>
+
+<section class="fv">
+  <div class="wrap">
+    <div class="fv-in">
+      <div class="fv-t">
+        <p class="fv-en">GREEN BAY KITCHEN</p>
+        <h1>グリーンベイ<br>キッチン</h1>
+        <p class="sub">マヌカハニーのある暮らし</p>
+        <p class="lead">日本全国のご当地食材や、<span class="nw">おうちの定番に。</span><br>マヌカハニーを使ったレシピを<span class="nw">まとめました。</span></p>
+        <p class="count">ただいま<b data-total></b>レシピ</p>
+      </div>
+      <div class="fv-y"><img src="img/yucco/03_honey_drizzle.png" alt="マヌカハニーをかけるYuccoさん" width="600" height="841"></div>
+    </div>
+    <a class="pick" data-pick></a>
+  </div>
+</section>
+
+<section class="sec" id="list" style="padding-top:20px">
+  <div class="wrap">
+    <h2 class="h2">食べたいものから<em>探す</em></h2>
+    <div class="filters" data-filters></div>
+    <p class="state" data-state><span>絞り込み中：<b data-state-t></b></span><button type="button" data-clear>すべて表示</button></p>
+    <div class="grid" data-grid></div>
+  </div>
+</section>
+
+<section class="sec map" id="map">
+  <div class="wrap">
+    <h2 class="h2">ご当地レシピを<em>地図から</em></h2>
+    <p class="h2-lead">都道府県を押すと、そのレシピだけを表示します。</p>
+    <div class="regions" data-regions></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap guide">
+    <div>
+      <h2 class="h2">マヌカハニーを<em>もっと知る</em></h2>
+      <p class="h2-lead">選び方や食べ方の読みものもどうぞ。</p>
+      <ul>
+        <li><a href="https://www.rakuten.co.jp/manuka/contents/manukahoney-beginner/">マヌカハニー初心者の簡単ガイド</a></li>
+        <li><a href="https://www.rakuten.co.jp/manuka/contents/manukahoney-UMF-MGO/">マヌカハニーの選び方　UMF？MGO？数字の意味は？</a></li>
+        <li><a href="https://www.rakuten.co.jp/manuka/contents/manukahoney-howtoeat/">マヌカハニーの食べ方　効率的な方法は？</a></li>
+        <li><a href="https://www.rakuten.co.jp/manuka/contents/manukahoney/baby-botulinum/">【注意】赤ちゃんにマヌカハニーはNG！</a></li>
+      </ul>
+    </div>
+    <img class="yu" src="img/yucco/05_delicious.png" alt="レシピを味見するYuccoさん" width="600" height="841" loading="lazy">
+  </div>
+  <div class="wrap">
+    <div class="btns">
+      <a class="btn" href="https://www.rakuten.co.jp/manuka/">マヌカハニーを見る</a>
+      <a class="btn bl" href="https://www.rakuten.co.jp/manuka/contents/topicslist/">トピックス一覧へ</a>
+    </div>
+    <p class="note">※はちみつは1歳未満の乳児には与えないでください。</p>
+  </div>
+</section>
+
+<footer class="ft"><p class="logo">GREEN BAY</p><p>マヌカハニー専門 グリーンベイ 楽天市場店</p></footer>
+
+<script>
+(function () {
+  "use strict";
+  var BASE = "https://www.rakuten.co.jp/manuka/contents/";
+  // レシピを追加するときは、この表に1行足すだけ(新しい順でなくてもOK・日付で並べ替えます)
+  // [記事URL(contents/以降), 表示名, 都道府県(定番レシピは""), 種類, 更新日, 画像ファイル名]
+  var RECIPES = [
+    ["manuka-recipe/japan/wakayama-kaki/", "柿のマヌカハニー<br>カプレーゼ風", "和歌山県", "副菜・サラダ", "2026-11-17", "wakayama-kaki"],
+    ["manuka-recipe/japan/gunma-yakimanju/", "焼きまんじゅうの<br>味噌だれ", "群馬県", "おやつ", "2026-11-16", "gunma-yakimanju"],
+    ["manuka-recipe/japan/hokkaido-chanchan/", "マヌカ味噌で<br>鮭ちゃんちゃん焼き", "北海道", "おかず", "2026-11-16", "hokkaido-chanchan"],
+    ["manuka-recipe/japan/yamaguchi-kawara/", "甘辛牛肉の<br>瓦そば", "山口県", "麺", "2026-11-16", "yamaguchi-kawara"],
+    ["manuka-recipe/japan/saitama-gyoda-furai/", "行田フライの<br>甘辛ソース", "埼玉県", "おかず", "2026-11-16", "saitama-gyoda-furai"],
+    ["manuka-recipe/japan/miyazaki-nanban/", "マヌカハニーで<br>チキン南蛮", "宮崎県", "おかず", "2026-11-16", "miyazaki-nanban"],
+    ["manuka-recipe/japan/kagoshima-gane/", "マヌカハニー入り<br>がね", "鹿児島県", "おかず", "2026-11-16", "kagoshima-gane"],
+    ["manuka-recipe/japan/tochigi-nikkori/", "にっこり梨の<br>オープンサンド", "栃木県", "おやつ", "2026-11-05", "tochigi-nikkori"],
+    ["manuka-recipe/japan/aichi-onimanju/", "マヌカハニー香る<br>鬼まんじゅう", "愛知県", "おやつ", "2026-11-04", "aichi-onimanju"],
+    ["manuka-recipe-01/", "夏野菜の<br>マヌカハニードレッシング", "", "副菜・サラダ", "2026-10-19", "manuka-recipe-01"],
+    ["manuka-recipe/Japan/tokushima-sudachi/", "すだちそうめん", "徳島県", "麺", "2026-10-19", "tokushima-sudachi"],
+    ["manuka-recipe/japan/miyagi-zunda/", "マヌカハニーの<br>ずんだ餡", "宮城県", "おやつ", "2026-10-19", "miyagi-zunda"],
+    ["manuka-recipe/japan/yamagata-dashi/", "マヌカハニーで<br>山形のだし", "山形県", "副菜・サラダ", "2026-10-19", "yamagata-dashi"],
+    ["manuka-recipe/hotcake-mix-cookie/", "ホットケーキミックスで<br>簡単クッキー", "", "おやつ", "2026-10-19", "hotcake-mix-cookie"],
+    ["manuka-recipe/japan/okinawa-shirishiri/", "にんじんしりしり", "沖縄県", "副菜・サラダ", "2026-10-19", "okinawa-shirishiri"],
+    ["manuka-recipe/japan/tokyo-daigakuimo/", "マヌカハニーで<br>大学いも", "東京都", "おやつ", "2026-10-19", "tokyo-daigakuimo"],
+    ["manuka-recipe-lemon/", "マヌカハニー<br>レモン漬け", "", "ドリンク・保存", "2026-10-01", "manuka-recipe-lemon"]
+  ].map(function (r) {
+    return {href: BASE + r[0], name: r[1], pref: r[2], type: r[3], date: r[4], img: "img/r/" + r[5] + ".jpg"};
+  }).sort(function (a, b) { return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0); });
+
+  var TYPES = ["おかず", "麺", "副菜・サラダ", "おやつ", "ドリンク・保存"];
+  var REGIONS = [
+    {k: "hk", n: "北海道・東北", p: ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県"]},
+    {k: "kt", n: "関東", p: ["茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県"]},
+    {k: "cb", n: "中部", p: ["新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県"]},
+    {k: "kk", n: "近畿", p: ["三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県"]},
+    {k: "cs", n: "中国・四国", p: ["鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県"]},
+    {k: "ky", n: "九州・沖縄", p: ["福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"]}
+  ];
+  var NEW_DAYS = 14;
+  var state = {type: "", pref: ""};
+  var $ = function (s) { return document.querySelector(s); };
+  var isNew = function (d) { return (Date.now() - new Date(d + "T00:00:00+09:00").getTime()) / 864e5 <= NEW_DAYS; };
+  var plain = function (s) { return s.replace(/<br>/g, ""); };
+  var md = function (d) { var p = d.split("-"); return +p[1] + "/" + +p[2]; };
+
+  // 件数
+  $("[data-total]").textContent = RECIPES.length;
+
+  // 最新のレシピ
+  var p = RECIPES[0], pk = $("[data-pick]");
+  pk.href = p.href;
+  pk.innerHTML = '<img src="' + p.img + '" alt="' + plain(p.name) + '" width="800" height="450">' +
+    '<div class="bd"><span class="new">NEW</span><h2>' + p.name + '</h2>' +
+    '<span class="pr">' + (p.pref || "定番レシピ") + '・' + md(p.date) + ' 公開</span><span class="go">いちばん新しいレシピを見る</span></div>';
+
+  // 種類のボタン
+  function renderFilters() {
+    var cnt = function (t) { return RECIPES.filter(function (r) { return !t || r.type === t; }).length; };
+    $("[data-filters]").innerHTML = [""].concat(TYPES).map(function (t) {
+      return '<button type="button" class="chip' + (state.type === t && !state.pref ? " on" : "") + '" data-type="' + t + '">' + (t || "すべて") + '<span>' + cnt(t) + '</span></button>';
+    }).join("");
+  }
+
+  function renderGrid() {
+    var list = RECIPES.filter(function (r) {
+      return (!state.type || r.type === state.type) && (!state.pref || r.pref === state.pref || (state.pref === "定番" && !r.pref));
+    });
+    $("[data-grid]").innerHTML = list.length ? list.map(function (r, i) {
+      return '<a class="card" style="animation-delay:' + (i * 0.04) + 's" href="' + r.href + '">' +
+        '<div class="im"><img src="' + r.img + '" alt="' + plain(r.name) + '" width="800" height="450" loading="lazy">' + (isNew(r.date) ? '<span class="nb">NEW</span>' : "") + '</div>' +
+        '<div class="tags"><span class="tg pf">' + (r.pref || "定番") + '</span><span class="tg ty">' + r.type + '</span></div>' +
+        '<h3>' + r.name + '</h3><p class="dt">' + md(r.date) + '</p></a>';
+    }).join("") : '<p class="empty">この条件のレシピはまだありません。</p>';
+    var lbl = state.pref ? (state.pref === "定番" ? "定番レシピ" : state.pref) : state.type;
+    $("[data-state]").classList.toggle("show", !!lbl);
+    $("[data-state-t]").textContent = lbl + "（" + list.length + "件）";
+  }
+
+  function renderRegions() {
+    var html = REGIONS.map(function (g) {
+      var ps = g.p.filter(function (x) { return RECIPES.some(function (r) { return r.pref === x; }); });
+      if (!ps.length) return '<div class="rg r-' + g.k + '"><h3>' + g.n + '</h3><div class="ps"><span style="font-size:14px;opacity:.8">準備中</span></div></div>';
+      return '<div class="rg r-' + g.k + '"><h3>' + g.n + '<small>' + ps.length + '</small></h3><div class="ps">' +
+        ps.map(function (x) { return '<button type="button" data-pref="' + x + '">' + x.replace(/[県府]$/, "").replace(/^東京都$/, "東京") + '</button>'; }).join("") + '</div></div>';
+    }).join("");
+    var tb = RECIPES.filter(function (r) { return !r.pref; }).length;
+    html += '<div class="rg r-teiban"><h3>おうちの定番<small>' + tb + '</small></h3><div class="ps"><button type="button" data-pref="定番">定番レシピを見る</button></div></div>';
+    $("[data-regions]").innerHTML = html;
+  }
+
+  function update(scroll) {
+    renderFilters(); renderGrid();
+    if (scroll) $("#list").scrollIntoView({behavior: "smooth"});
+  }
+
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest("[data-type],[data-pref],[data-clear]");
+    if (!t) return;
+    if (t.hasAttribute("data-type")) { state = {type: t.getAttribute("data-type"), pref: ""}; update(false); }
+    else if (t.hasAttribute("data-pref")) { state = {type: "", pref: t.getAttribute("data-pref")}; update(true); }
+    else { state = {type: "", pref: ""}; update(false); }
+  });
+
+  renderRegions(); update(false);
+})();
+</script>
+</body>
+</html>
