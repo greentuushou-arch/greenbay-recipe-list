@@ -150,6 +150,41 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   .guide .yu{width:46%;max-width:200px;margin:0 auto;order:-1}
   .btns{grid-template-columns:1fr}
 }
+
+/* 記事らしさ: 書き出し・要約 */
+.card{text-align:left;background:var(--paper);border-radius:18px;border:2px solid var(--ink);overflow:hidden}
+.card img{border:0;border-radius:0;border-bottom:2px solid var(--ink)}
+.card .nb{left:10px;top:10px}
+.card .body{display:flex;flex-direction:column;flex:1;padding:12px 14px 14px}
+.card .tags{justify-content:flex-start;margin-top:0}
+.card .tx{display:flex;flex-direction:column;flex:1}
+.cc{font-weight:700;font-size:15px;color:var(--red);line-height:1.5;margin-top:8px;word-break:auto-phrase}
+.card h3{margin-top:2px;font-size:19px;word-break:auto-phrase}
+@media (min-width:761px){.card h3 br{display:none}}
+.ds{font-size:15px;line-height:1.75;color:var(--sub);margin-top:6px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.ft2{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:10px;border-top:1px dashed var(--line)}
+.card .ds+.ft2{margin-top:10px}
+.ft2 .dt{margin:0}
+.ft2 .rd{font-weight:700;font-size:15px;color:var(--blue)}
+.ft2 .rd:after{content:" ›"}
+.pick .cc{margin-top:10px;font-size:16px}
+.pick h2{margin-top:2px}
+.pick .ds{-webkit-line-clamp:4;text-align:left;margin-top:10px;font-size:15px}
+.pick .pr{margin-top:10px}
+@media (max-width:760px){
+  .grid{grid-template-columns:1fr;gap:14px}
+  .card{display:grid;grid-template-columns:42% minmax(0,1fr);align-items:stretch}
+  .card .body{min-width:0}
+  .card h3{overflow-wrap:anywhere}
+  .card .im{height:100%}
+  .card img{height:100%;aspect-ratio:auto;object-fit:cover;object-position:64% 45%;border-bottom:0;border-right:2px solid var(--ink)}
+  .card .body{padding:10px 12px 12px}
+  .card h3{font-size:17px}
+  .cc{font-size:14px;margin-top:6px}
+  .ds{font-size:14px;-webkit-line-clamp:2;line-height:1.65}
+  .ft2{padding-top:8px}
+}
+@media (max-width:760px) and (min-width:0){.card .tags .tg{font-size:14px}}
 @media (prefers-reduced-motion:reduce){.fv-y img,.card{animation:none}}
 </style>
 </head>
@@ -244,9 +279,80 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     ["manuka-recipe/japan/tokyo-daigakuimo/", "マヌカハニーで<br>大学いも", "東京都", "おやつ", "2026-10-19", "tokyo-daigakuimo"],
     ["manuka-recipe-lemon/", "マヌカハニー<br>レモン漬け", "", "ドリンク・保存", "2026-10-01", "manuka-recipe-lemon"]
   ].map(function (r) {
-    return {href: BASE + r[0], name: r[1], pref: r[2], type: r[3], date: r[4], img: "img/r/" + r[5] + ".jpg"};
+    return {href: BASE + r[0], name: r[1], pref: r[2], type: r[3], date: r[4], img: "img/r/" + r[5] + ".jpg", slug: r[5]};
   }).sort(function (a, b) { return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0); });
 
+  // 記事の書き出し(c)と要約(d)。要約は各記事の説明文から
+  var TEXT = {
+   "wakayama-kaki": {
+    "c": "いつもの柿を、今日はちょっとおめかし。",
+    "d": "和歌山県産の柿とモッツァレラで作る、マヌカハニーの柿のカプレーゼ風。火を使わず、切って並べてドレッシングをかける簡単レシピです。黒こしょうを利かせた前菜風と、入れずに楽しむスイーツ感覚の食べ方、スタッフyuccoの実食コメントもご紹介します。"
+   },
+   "gunma-yakimanju": {
+    "c": "味噌とマヌカハニーのマリアージュ！",
+    "d": "群馬旅行をきっかけに、県名物の焼きまんじゅうをグリーンベイのマヌカハニー入りの味噌だれでアレンジ。味噌だれの材料とトースターを使った作り方のポイント、付属のたれとの食べ比べ、実際に作ったスタッフの感想をご紹介します。"
+   },
+   "hokkaido-chanchan": {
+    "c": "手間は少なく、おいしさはしっかり。",
+    "d": "秋鮭とたっぷりの野菜で、北海道のちゃんちゃん焼きをマヌカハニー（お好みのグレード）入りの味噌だれにアレンジ。フライパンで作る材料・手順と、実際に作ったグリーンベイスタッフyuccoの感想をご紹介します。"
+   },
+   "yamaguchi-kawara": {
+    "c": "茶そば、焼いて楽しみませんか？",
+    "d": "山口名物・瓦そばをフライパンで。牛肉の甘辛だれにマヌカハニーを使い、パリッと焼いた茶そばと合わせました。2人分の材料と作り方、焼くコツ、今回の茶そばとの甘さの相性、レモンともみじおろしによる味の変化を、実際に作ったスタッフyuccoが率直にご紹介します。"
+   },
+   "saitama-gyoda-furai": {
+    "c": "揚げない「フライ」を甘辛マヌカソースで。",
+    "d": "埼玉県行田市のご当地料理「行田フライ」を、マヌカハニー入りの甘辛ソースでアレンジ。料理の由来や材料、フライパンでの作り方、ソースにグリーンベイのマヌカハニーを使うポイント、実際に作ったGreen Bayスタッフの感想をご紹介します。"
+   },
+   "miyazaki-nanban": {
+    "c": "いつものチキンを、甘酸っぱいごちそうに。",
+    "d": "宮崎名物のチキン南蛮を、仕上げのマヌカハニー入り南蛮酢でアレンジ。揚げ焼きしたチキンに甘酢を絡め、食べる直前にもう一度かける作り方や、手作りタルタルと味わったグリーンベイスタッフyuccoの実食感想をご紹介します。"
+   },
+   "kagoshima-gane": {
+    "c": "甘い衣に、しょうがを効かせて。",
+    "d": "鹿児島の郷土料理「がね」を、マヌカハニー入りの甘い衣で作ってみました。粉は薄力粉だけ。材料と作り方、揚げるときのポイント、パリパリの食感としょうがとの相性をスタッフyuccoがご紹介。娘の「不思議な味……」の、その後や、次に試したい食べ方も。"
+   },
+   "tochigi-nikkori": {
+    "c": "秋の「しゃりしゃり」をトーストに。",
+    "d": "栃木県のにっこり梨を使った、マヌカハニーとクリームチーズのオープンサンド。しゃりしゃり食感とみずみずしい甘みを楽しむ、食パンで作れる簡単レシピをご紹介。材料・分量・作り方から実食の感想まで、旬の梨の食べ方や朝食・おやつのアレンジを探している方におすすめです。"
+   },
+   "aichi-onimanju": {
+    "c": "せいろから、おやつの時間へ。",
+    "d": "愛知名物・鬼まんじゅうをホットケーキミックスでアレンジ。生地にマヌカハニーを少し加え、お好みでディップも楽しみます。材料と作り方、蒸すときのポイント、ホクホクのお芋とほんのりした香りを味わったスタッフyuccoの実食感想をご紹介します。"
+   },
+   "manuka-recipe-01": {
+    "c": "夏野菜だからこそ、ドレッシングにもひと工夫。",
+    "d": "ナスやトマト、ズッキーニ、レタスなど夏野菜がおいしい季節。Green Bayスタッフが実際に作ってみたマヌカハニードレッシングをご紹介します。簡単レシピとおすすめの楽しみ方をお届けします。"
+   },
+   "tokushima-sudachi": {
+    "c": "すだちの香りを、ひんやりそうめんで。",
+    "d": "徳島県の特産品すだちを使ったそうめんを、グリーンベイのマヌカハニー入りの白だしつゆでアレンジ。材料と作り方、酸味と塩味がまろやかにまとまったスタッフの実食感想、次回試したいアイデアをご紹介します。"
+   },
+   "miyagi-zunda": {
+    "c": "マヌカハニーと枝豆のマリアージュ。",
+    "d": "宮城名物のずんだ餡を、マヌカハニーで簡単アレンジ。枝豆の風味を生かしたずんだ餡の作り方と、白玉・ずんだシェイクで楽しむGreen Bayスタッフのご当地レシピをご紹介します。"
+   },
+   "yamagata-dashi": {
+    "c": "いつもの夏野菜に、ひとさじの隠し味。",
+    "d": "山形出身の祖母が作ってくれた郷土料理「だし」を、レモンのマヌカハニー漬けシロップでアレンジ。夏野菜たっぷりの作り方や、隠し味で酸味がまろやかになったグリーンベイスタッフyuccoの実食感想、普段の楽しみ方をご紹介します。"
+   },
+   "hotcake-mix-cookie": {
+    "c": "焼いてる時間って、しあわせ。",
+    "d": "ホットケーキミックスとドライフルーツで作る簡単クッキー。焼き上がったクッキーにマヌカハニーをとろりとかけて楽しむ、グリーンベイスタッフyuccoのちょっと休憩レシピです。"
+   },
+   "okinawa-shirishiri": {
+    "c": "仕上げのひとさじで、いつものにんじんを。",
+    "d": "沖縄の家庭料理・にんじんしりしりを、仕上げのマヌカハニーでアレンジ。粗熱を取ってから加える作り方や、香りとまろやかさを楽しんだグリーンベイyuccoの実食感想、家族の意外な反応をご紹介します。"
+   },
+   "tokyo-daigakuimo": {
+    "c": "お芋とはちみつ、合わないわけがない！",
+    "d": "東京名物・大学芋を、揚げずにマヌカハニーでアレンジ。白ごまを使った作り方と、娘たちにも好評だった実食コメントをご紹介します。バニラアイスやヨーグルトと合わせた楽しみ方もお届けします。"
+   },
+   "manuka-recipe-lemon": {
+    "c": "暑い季節を、すっきり爽やかに。",
+    "d": "材料2つで簡単に作れるマヌカハニーレモン漬けをご紹介。水・ソーダ・お酒・ドレッシングへのアレンジや、シャリシャリアイス、ドリンク用アイスキューブまで実際に試しました。"
+   }
+  };
   var TYPES = ["おかず", "麺", "副菜・サラダ", "おやつ", "ドリンク・保存"];
   var REGIONS = [
     {k: "hk", n: "北海道・東北", p: ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県"]},
@@ -270,8 +376,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   var p = RECIPES[0], pk = $("[data-pick]");
   pk.href = p.href;
   pk.innerHTML = '<img src="' + p.img + '" alt="' + plain(p.name) + '" width="800" height="450">' +
-    '<div class="bd"><span class="new">NEW</span><h2>' + p.name + '</h2>' +
-    '<span class="pr">' + (p.pref || "定番レシピ") + '・' + md(p.date) + ' 公開</span><span class="go">いちばん新しいレシピを見る</span></div>';
+    '<div class="bd"><span class="new">NEW</span><p class="cc">' + TEXT[p.slug].c + '</p><h2>' + p.name + '</h2>' +
+    '<p class="ds">' + TEXT[p.slug].d + '</p>' +
+    '<span class="pr">' + (p.pref || "定番レシピ") + '・' + md(p.date) + '・レシピ担当 yucco</span><span class="go">記事を読む</span></div>';
 
   // 種類のボタン
   function renderFilters() {
@@ -288,8 +395,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     $("[data-grid]").innerHTML = list.length ? list.map(function (r, i) {
       return '<a class="card" style="animation-delay:' + (i * 0.04) + 's" href="' + r.href + '">' +
         '<div class="im"><img src="' + r.img + '" alt="' + plain(r.name) + '" width="800" height="450" loading="lazy">' + (isNew(r.date) ? '<span class="nb">NEW</span>' : "") + '</div>' +
-        '<div class="tags"><span class="tg pf">' + (r.pref || "定番") + '</span><span class="tg ty">' + r.type + '</span></div>' +
-        '<h3>' + r.name + '</h3><p class="dt">' + md(r.date) + '</p></a>';
+        '<div class="body"><div class="tags"><span class="tg pf">' + (r.pref || "定番") + '</span><span class="tg ty">' + r.type + '</span></div>' +
+        '<div class="tx"><p class="cc">' + TEXT[r.slug].c + '</p><h3>' + r.name + '</h3>' +
+        '<p class="ds">' + TEXT[r.slug].d + '</p>' +
+        '<p class="ft2"><span class="dt">' + md(r.date) + '</span><span class="rd">記事を読む</span></p></div></div></a>';
     }).join("") : '<p class="empty">この条件のレシピはまだありません。</p>';
     var lbl = state.pref ? (state.pref === "定番" ? "定番レシピ" : state.pref) : state.type;
     $("[data-state]").classList.toggle("show", !!lbl);
